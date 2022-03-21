@@ -20,32 +20,38 @@
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false);
-
+let token_container;
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     //document.getElementById('deviceready').classList.add('ready');
-
     $("#loginButtonID").on("click", function(){
         $.ajax({
             method: "GET",
-            url: "https://vrschool7.herokuapp.com/api/login",
+            url: $('#url').val(),
             data : {"username" : $('#usuario').val(),"password" :  $('#password').val()},
             dataType: "json",   // necessitem aixo pq ens retorni un objecte JSON
-        }).done(function (msg) {
+        }).done(function (dades) {
             console.log($('#usuario').val(),"password" ,  $('#password').val());
-            for(let item in msg) {
-                console.log(msg[item]);
-            // aquí caldría fer mes coses, of course...
-            // ...
-            };
-    
+            
+            if (dades["status"] == "OK"){
+                localStorage.setItem("token_container", dades["session_token"]);
+                alert("Connected");
+                console.log(dades["course_list"]);
+                location.href = "muestraDatos.html";
+                
+            }
+            else{
+                alert("Faltan datos por introducir");
+            }
             //let newElement = $("<a id='listelement' class='collection-item' href='#!'>"+msg[item]+"</a>");
         }).fail(function () {
+            console.log( $('#url').val());
             alert("ERROR");
+            
         });
-        alert("asjkcnjkas");
-        //location.href = "muestraDatos.html"
+        
+        return false;
     });
 }
