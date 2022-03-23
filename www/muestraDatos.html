@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf -8">
         <meta http-equiv="Content-Security-Policy" 
-        content="default-src https://code.jquery.com https://fonts.gstatic.com 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' data: https://vrschool7.herokuapp.com/api/get_course; style-src https://fonts.googleapis.com 'self' 'unsafe-inline'; media-src *; img-src 'self' * data: content:;">  
+        content="default-src https://code.jquery.com https://fonts.gstatic.com 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' data: https://vrschool7.herokuapp.com; style-src https://fonts.googleapis.com 'self' 'unsafe-inline'; media-src *; img-src 'self' * data: content:;"> 
         <meta name="format-detection" content="telephone=no">
         <title>VRSchool7 Api datos</title>
 
@@ -20,16 +20,46 @@
               text-align: center;
               margin: 50px;
             }
+
+            .tabs-content {
+            height: 100%;
+            overflow-y: scroll !important;
+            }
             
         </style>
-        <h1 style="color: white;">Courses</h1>
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container">
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Navbar Link</a></li>
+            </ul>
+            <ul id="tabs-swipe-demo" class="tabs">
+                <li class="tab col s3"><a class="active" href="#test-swipe-1">Courses</a></li>
+                <li class="tab col s3"><a href="#test-swipe-2">Course Tasks</a></li>
+                
+            </ul>
+
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="#">Navbar Link</a></li>
+            </ul>
+            </div>
+        </nav>
         
-        <ul id ="lista_courses" class="collection with-header">
+        <div id = "test-swipe-1" class="col s12">
+            <h1 style="color: white;">Courses</h1>
+            <div class="container">
+                <div class="input-field col s6">
+                
+                </div>                
+                <ul id ="lista_courses" class="collection with-header">
 
-        </ul>
-
+                </ul>
+                        
+                </div>
+            </div>
+        </div>
+        <div id="test-swipe-2" class="col s12">Test 2</div>
     </body>
-
+    
     <script src="cordova.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
