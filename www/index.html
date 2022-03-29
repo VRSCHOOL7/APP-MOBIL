@@ -11,45 +11,88 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <header id = "header">
+    <style>
+      header{
+        background-color: rgb(217,55,104);
+        height: 180px;
+        margin-bottom: 10%;
+        justify-content: center;
+      }
+      .logo_header{
+        margin-bottom: 20%;
+        margin-left: 20%;
+        margin-right: 20%;
+        margin-top: 10%;
+      }
+
+      
+    </style>
+    <img class = "logo_header" src="Logo_Blanco.png" width="40%" height="50%">
+  </header>
 </head>
 
 <body>
   <style>
     body{
-      background: rgb(2,0,36);
-      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(83,50,152,1) 31%, rgba(0,212,255,1) 100%); 
+      background-color: rgb(255,255,255);
       text-align: center;
+      
+    }
+    .input-field{
+      background: rgb(55, 73, 154);
+      
     }
 
+    footer{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      background: rgb(55, 73, 154);
+      padding-bottom: 20%;
+      color: white;
+    }
+
+    
   </style>
-    <h1 text-align = "center" style = "color: white;">Log in</h1>
+  
+    <img src="VR_LOGO_Arriba.png" class = "logo_login" width="10%" height="7%">
     <div class="row">
       
         <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
+          <div class="row" style="margin-left: 15%;">
+            <div class="input-field col s12" style="width: 250px;">
               <input id="usuario" type="text" class="validate" style="color: white;">
               <label for="first_name">Ususari</label>
             </div>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
+          <div class="row" style="margin-left: 15%;">
+            <div class="input-field col s12" style="width: 250px;">
                 <input id="password" type="password"style="color: white;">
               <label for="password">Contrasenya</label>
             </div>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
+          <div class="row" style="margin-left: 15%;">
+            <div class="input-field col s12" style="width: 250px;">
                 <input id="url" type="url" style="color: white;" value="https://vrschool7.herokuapp.com/api/login">
               <label for="urlAPI">API URL</label>
             </div>
           </div>
-          <button id = "loginButtonID" class="btn waves-effect waves-light" type="submit" name="action">Login
+          
+          <button id = "loginButtonID" class="btn waves-effect waves-light" type="submit" name="action" style="background-color: rgb(217,55,104); margin-bottom: 5%;">Login
             <i class="material-icons right">send</i>
         </button>
         </form>    
     </div>
-    
+    <br><br><br>
+    <footer>
+      
+      <p>Bienvenido a VR Room</p>
+      <p>Identifiquese para poder continuar</p>
+      
+    </footer>
 </body>
 
 
@@ -58,3 +101,4 @@
 <script src="js/materialize.js"></script>
 <script src="js/index.js"></script>
 </html>
+

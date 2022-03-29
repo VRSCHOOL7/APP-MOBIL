@@ -37,7 +37,6 @@ function onDeviceReady() {
             
             if (dades["status"] == "OK"){
                 localStorage.setItem("token_container", dades["session_token"]);
-                alert("Connected");
                 console.log(dades["course_list"]);
                 location.href = "muestraDatos.html";
                 
