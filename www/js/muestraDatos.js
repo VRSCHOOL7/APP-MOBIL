@@ -14,6 +14,9 @@ function getVRTasksPIN(taskID){
             $("#textoPIN").text(dades["PIN"]);
             $('#modal1').modal();
             $('#modal1').modal('open'); 
+
+        }).fail(function () {
+            alert("ERROR");
         });
     };
 }
@@ -74,10 +77,7 @@ function onDeviceReady() {
                 newelem.click(loadCourse(dades["course_list"][i]["_id"]));
 
             }
-
             
-        
-
         }).fail(function () {
             alert("ERROR");
         });
