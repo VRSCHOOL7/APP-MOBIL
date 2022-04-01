@@ -19,6 +19,8 @@ function getVRTasksPIN(taskID){
             alert("ERROR");
         });
     };
+
+   
 }
 function loadCourse(IdCursos){
     return function(){
@@ -32,7 +34,7 @@ function loadCourse(IdCursos){
         
             $('#lista_vrTasks').empty();
             for (i in dades["course"]["vr_tasks"]){
-                let newElementList = $("<a id = 'vrTasks' class='collection-item' href = '#!' style='color: rgb(217,55,104);'>"+ dades["course"]["vr_tasks"][i]["title"]+ "</a><br>");
+                let newElementList = $("<a id = 'vrTasks' class='collection-item' href = '#!' style='color: rgb(55, 73, 154);'>"+ dades["course"]["vr_tasks"][i]["title"]+ "</a><br>");
                 let vrTasks_ID = dades["course"]["vr_tasks"][i]["ID"]
                 newElementList.click(getVRTasksPIN(vrTasks_ID));
                 $('#lista_vrTasks').append(newElementList);
@@ -40,13 +42,13 @@ function loadCourse(IdCursos){
 
             $('#lista_Tasks').empty();
             for (i in dades["course"]["tasks"]){
-                let newElementList = "<a id = 'tasks' style='color: rgb(217,55,104);'>"+ dades["course"]["tasks"][i]["title"]+ "</a><br>";           
+                let newElementList = "<a id = 'tasks' class='collection-item' style='color: rgb(55, 73, 154);'>"+ dades["course"]["tasks"][i]["title"]+ "</a><br>";           
                 $('#lista_Tasks').append(newElementList);
             }
 
             $('#lista_Elements').empty();
             for (i in dades["course"]["elements"]){
-                let newElementList = "<a id = 'elements' style='color: rgb(217,55,104);'>"+ dades["course"]["elements"][i]["title"]+ "</a><br>";           
+                let newElementList = "<a id = 'elements' class='collection-item' style='color: rgb(55, 73, 154);'>"+ dades["course"]["elements"][i]["title"]+ "</a><br>";           
                 $('#lista_Elements').append(newElementList);
             }
             
@@ -71,7 +73,7 @@ function onDeviceReady() {
             console.log(dades);
             for (i in dades["course_list"]){
                 console.log(dades["course_list"][i]["title"]);
-                let newelem = $("<a id='listelement' class='collection-item' href='#!'>"+dades["course_list"][i]["title"]+"</a>");
+                let newelem = $("<a id='listelement' class='collection-item' href='#!' style='color: rgb(55, 73, 154);'>"+dades["course_list"][i]["title"]+"</a>");
                 $("#lista_courses").append(newelem);
                
                 newelem.click(loadCourse(dades["course_list"][i]["_id"]));

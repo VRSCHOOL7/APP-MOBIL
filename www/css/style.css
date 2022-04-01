@@ -1,0 +1,33 @@
+header{
+    background-color: rgb(217,55,104);
+    height: 180px;
+    margin-bottom: 10%;
+    justify-content: center;
+  }
+  .logo_header{
+    margin-bottom: 20%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10%;
+  }
+  
+  body{
+    background-color: rgb(255,255,255);
+    text-align: center;
+    
+  }
+  .input-field{
+    background: rgb(55, 73, 154);
+    
+  }
+
+  footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background: rgb(55, 73, 154);
+    padding-bottom: 20%;
+    color: white;
+  }
