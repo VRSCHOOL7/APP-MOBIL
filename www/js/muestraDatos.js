@@ -19,6 +19,8 @@ function getVRTasksPIN(taskID){
             alert("ERROR");
         });
     };
+
+   
 }
 function loadCourse(IdCursos){
     return function(){
