@@ -11,10 +11,17 @@ function getVRTasksPIN(taskID){
             data: {session_token: localStorage.getItem('token_container'), VRtaskID:taskID},
             dataType: "json",
         }).done(function (dades) {
-            $("#textoPIN").text(dades["PIN"]);
+         
             $('#modal1').modal();
             $('#modal1').modal('open'); 
 
+            $("#pinButton").click(function(){
+                $("#pinButton").text(dades["PIN"]);
+                $(this).css('background-color','rgb(217,55,104)');
+            });
+
+            $("#pinButton").text("PIN");
+            $("#pinButton").css('background-color','green');
         }).fail(function () {
             alert("ERROR");
         });
@@ -37,7 +44,17 @@ function loadCourse(IdCursos){
                 let newElementList = $("<a id = 'vrTasks' class='collection-item' href = '#!' style='color: rgb(55, 73, 154);'>"+ dades["course"]["vr_tasks"][i]["title"]+ "</a><br>");
                 let vrTasks_ID = dades["course"]["vr_tasks"][i]["ID"]
                 newElementList.click(getVRTasksPIN(vrTasks_ID));
+
+                if (dades["course"]["vr_tasks"][i]["completions"][0] != undefined) {
+                    $("#notaEx").text(dades["course"]["vr_tasks"][i]["completions"][0]["autograde"]["score"]);
+
+                }
+               
+                $("#notaEx").text("No hay nota registrada");
+                
+
                 $('#lista_vrTasks').append(newElementList);
+               
             }
 
             $('#lista_Tasks').empty();
