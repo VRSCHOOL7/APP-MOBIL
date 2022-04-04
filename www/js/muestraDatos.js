@@ -3,18 +3,36 @@ $('.tabs').tabs({"swipeable": true});
 $('.sidenav').sidenav();
 $('select').formSelect();
 $('.scrollspy').scrollSpy();
-function getVRTasksPIN(taskID){
+function getVRTasksPIN(task){
     return function(){
         $.ajax({
             method: "GET",
             url: "https://vrschool7.herokuapp.com/api/pin_request",
-            data: {session_token: localStorage.getItem('token_container'), VRtaskID:taskID},
+            data: {session_token: localStorage.getItem('token_container'), VRtaskID:task["ID"]},
             dataType: "json",
         }).done(function (dades) {
          
             $('#modal1').modal();
             $('#modal1').modal('open'); 
+            if (task["completions"][0] != undefined) {
+                $("#notaEx").text(task["completions"][0]["autograde"]["score"]);
+                $("#fallosEx").text(task["completions"][0]["autograde"]["failed_items"]);
+                $("#aciertosEx").text(task["completions"][0]["autograde"]["passed_items"]);
+                $("#comentariosEx").text(task["completions"][0]["autograde"]["comments"]);
+                $("#tituloEx1").text("Tus fallos:");
+                $("#tituloEx2").text("Tus aciertos:");
+                $("#tituloEx3").text("Comentarios:");
 
+
+            }else{
+                $("#notaEx").text("No hay nota registrada");
+                $("#fallosEx").text("");
+                $("#aciertosEx").text("");
+                $("#comentariosEx").text("");
+                $("#tituloEx1").text("");
+                $("#tituloEx2").text("");
+                $("#tituloEx3").text("");
+            }
             $("#pinButton").click(function(){
                 $("#pinButton").text(dades["PIN"]);
                 $(this).css('background-color','rgb(217,55,104)');
@@ -42,15 +60,9 @@ function loadCourse(IdCursos){
             $('#lista_vrTasks').empty();
             for (i in dades["course"]["vr_tasks"]){
                 let newElementList = $("<a id = 'vrTasks' class='collection-item' href = '#!' style='color: rgb(55, 73, 154);'>"+ dades["course"]["vr_tasks"][i]["title"]+ "</a><br>");
-                let vrTasks_ID = dades["course"]["vr_tasks"][i]["ID"]
-                newElementList.click(getVRTasksPIN(vrTasks_ID));
+                let vrTask = dades["course"]["vr_tasks"][i]
+                newElementList.click(getVRTasksPIN(vrTask));
 
-                if (dades["course"]["vr_tasks"][i]["completions"][0] != undefined) {
-                    $("#notaEx").text(dades["course"]["vr_tasks"][i]["completions"][0]["autograde"]["score"]);
-
-                }
-               
-                $("#notaEx").text("No hay nota registrada");
                 
 
                 $('#lista_vrTasks').append(newElementList);
