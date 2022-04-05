@@ -50,7 +50,7 @@ function loadCourse(IdCursos){
 
             $('#lista_Elements').empty();
             for (i in dades["course"]["elements"]){
-                let newElementList = "<a id = 'elements' class='collection-item' style='color: rgb(55, 73, 154);'>"+ dades["course"]["elements"][i]["title"]+ "</a><br>";           
+                let newElementList = "<a id = 'elements' class='collection-item' style='color: rgb(55, 73, 154);'>"+ dades["course"]["elements"][i]+ "</a><br>";           
                 $('#lista_Elements').append(newElementList);
             }
             
