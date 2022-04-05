@@ -28,15 +28,16 @@ function onDeviceReady() {
     //document.getElementById('deviceready').classList.add('ready');
     $("#loginButtonID").on("click", function(){
         $.ajax({
+            headers: {  'accept': 'application/json' },
             method: "GET",
             url: $('#url').val(),
-            data : {"username" : $('#usuario').val(),"password" :  $('#password').val()},
+            data : {"email" : $('#usuario').val(),"password" :  $('#password').val()},
             dataType: "json",   // necessitem aixo pq ens retorni un objecte JSON
         }).done(function (dades) {
             console.log($('#usuario').val(),"password" ,  $('#password').val());
             
             if (dades["status"] == "OK"){
-                localStorage.setItem("token_container", dades["session_token"]);
+                localStorage.setItem("token_container", dades["token"]);
                 console.log(dades["course_list"]);
                 location.href = "muestraDatos.html";
                 
@@ -45,7 +46,9 @@ function onDeviceReady() {
                 alert("Faltan datos por introducir");
             }
             //let newElement = $("<a id='listelement' class='collection-item' href='#!'>"+msg[item]+"</a>");
-        }).fail(function () {
+        }).fail(function (error) {
+            console.log(error);
+            alert(error);
             console.log( $('#url').val());
             alert("ERROR");
             

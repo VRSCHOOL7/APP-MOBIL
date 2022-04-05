@@ -6,8 +6,9 @@ $('.scrollspy').scrollSpy();
 function getVRTasksPIN(taskID){
     return function(){
         $.ajax({
+            headers: {  'accept': 'application/json' },
             method: "GET",
-            url: "https://vrschool7.herokuapp.com/api/pin_request",
+            url: "https://ietimoodlenose.herokuapp.com/api/pin_request",
             data: {session_token: localStorage.getItem('token_container'), VRtaskID:taskID},
             dataType: "json",
         }).done(function (dades) {
@@ -26,9 +27,10 @@ function loadCourse(IdCursos){
     return function(){
         //$('#test-swipe-2').empty();
         $.ajax({
+            headers: {  'accept': 'application/json' },
             method: "GET",
-            url: "https://vrschool7.herokuapp.com/api/get_course_details",
-            data: {session_token: localStorage.getItem('token_container'), courseID:IdCursos},
+            url: "https://ietimoodlenose.herokuapp.com/api/get_course_details",
+            data: {token: localStorage.getItem('token_container'), courseID:IdCursos},
             dataType: "json",      
         }).done(function (dades) {
         
@@ -42,7 +44,7 @@ function loadCourse(IdCursos){
 
             $('#lista_Tasks').empty();
             for (i in dades["course"]["tasks"]){
-                let newElementList = "<a id = 'tasks' class='collection-item' style='color: rgb(55, 73, 154);'>"+ dades["course"]["tasks"][i]["title"]+ "</a><br>";           
+                let newElementList = "<a id = 'tasks' class='collection-item' style='color: rgb(55, 73, 154);'>"+ dades["course"]["tasks"][i]+ "</a><br>";           
                 $('#lista_Tasks').append(newElementList);
             }
 
@@ -65,9 +67,10 @@ function onDeviceReady() {
     $( document ).ready(function() {
         let token = localStorage.getItem('token_container');
         $.ajax({
+            headers: {  'accept': 'application/json' },
             method: "GET",
-            url: "https://vrschool7.herokuapp.com/api/get_course",
-            data: {session_token: token},
+            url: "https://ietimoodlenose.herokuapp.com/api/get_courses",
+            data: {"token": token},
             dataType: "json",   // necessitem aixo pq ens retorni un objecte JSON
         }).done(function (dades) {
             console.log(dades);
@@ -75,8 +78,7 @@ function onDeviceReady() {
                 console.log(dades["course_list"][i]["title"]);
                 let newelem = $("<a id='listelement' class='collection-item' href='#!' style='color: rgb(55, 73, 154);'>"+dades["course_list"][i]["title"]+"</a>");
                 $("#lista_courses").append(newelem);
-               
-                newelem.click(loadCourse(dades["course_list"][i]["_id"]));
+                newelem.click(loadCourse(dades["course_list"][i]["courseID"]));
 
             }
             
