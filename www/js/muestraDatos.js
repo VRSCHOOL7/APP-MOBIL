@@ -3,6 +3,33 @@ $('.tabs').tabs({"swipeable": true});
 $('.sidenav').sidenav();
 $('select').formSelect();
 $('.scrollspy').scrollSpy();
+
+function setTasks(task){
+    return function(){
+        $('#pinButton').hide();
+        $('#modal1').modal();
+        $('#modal1').modal('open'); 
+
+        if (task["uploads"][0] != undefined) {
+            $("#fallosEx").text("");
+            $("#aciertosEx").text("");
+            $("#tituloEx1").text("");
+            $("#tituloEx2").text("");
+            $("#notaEx").text(task["uploads"][0]["grade"]);
+            $("#tituloEx3").text("Comentarios:");
+            $("#comentariosEx").text(task["uploads"][0]["feedback"]);
+            
+        }else{
+            $("#notaEx").text("No hay nota registrada");
+            $("#fallosEx").text("");
+            $("#aciertosEx").text("");
+            $("#comentariosEx").text("");
+            $("#tituloEx1").text("");
+            $("#tituloEx2").text("");
+            $("#tituloEx3").text("");
+        }
+    }
+}
 function getVRTasksPIN(task){
     return function(){
         $.ajax({
@@ -11,10 +38,12 @@ function getVRTasksPIN(task){
             data: {session_token: localStorage.getItem('token_container'), VRtaskID:task["ID"]},
             dataType: "json",
         }).done(function (dades) {
-         
+            $('#pinButton').show();
             $('#modal1').modal();
             $('#modal1').modal('open'); 
+            
             if (task["completions"][0] != undefined) {
+                
                 $("#notaEx").text(task["completions"][0]["autograde"]["score"]);
                 $("#fallosEx").text(task["completions"][0]["autograde"]["failed_items"]);
                 $("#aciertosEx").text(task["completions"][0]["autograde"]["passed_items"]);
@@ -47,6 +76,8 @@ function getVRTasksPIN(task){
 
    
 }
+
+
 function loadCourse(IdCursos){
     return function(){
         //$('#test-swipe-2').empty();
@@ -63,15 +94,16 @@ function loadCourse(IdCursos){
                 let vrTask = dades["course"]["vr_tasks"][i]
                 newElementList.click(getVRTasksPIN(vrTask));
 
-                
-
                 $('#lista_vrTasks').append(newElementList);
                
             }
 
             $('#lista_Tasks').empty();
             for (i in dades["course"]["tasks"]){
-                let newElementList = "<a id = 'tasks' class='collection-item' style='color: rgb(55, 73, 154);'>"+ dades["course"]["tasks"][i]["title"]+ "</a><br>";           
+                let newElementList = $("<a id = 'tasks' class='collection-item'  href = '#!' style='color: rgb(55, 73, 154);'>"+ dades["course"]["tasks"][i]["title"]+ "</a><br>");
+                let taskRealizada = dades["course"]["tasks"][i]   
+                newElementList.click(setTasks(taskRealizada));
+
                 $('#lista_Tasks').append(newElementList);
             }
 
