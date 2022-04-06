@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "cordova": "^11.0.0",
     "cordova-jquery": "^0.1.6"
   }
 }
